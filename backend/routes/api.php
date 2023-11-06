@@ -45,3 +45,4 @@ Route::middleware(['auth', 'role:mesero'])->group(function () {
 });
 
 Route::post('login', [SecurityAuthController::class, 'login'])->name('login');
+Route::post('/registro', [userController::class, 'store'])->name('registro.store');
