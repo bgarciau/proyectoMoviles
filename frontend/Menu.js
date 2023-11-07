@@ -34,10 +34,10 @@ const Menu = ({ navigation }) => {
     if (hasToken) {
         return (
             <View style={styles.menuContainer}>
-                <TouchableButton title="Ir a Home" onPress={handleHome} style={styles.smallButton} />
-                <TouchableButton title="Ver mis ordenes" onPress={handleVerOrden} style={styles.smallButton} />
+                <TouchableButton title="Home" onPress={handleHome} style={styles.smallButton} />
                 <TouchableButton title="Realizar Orden" onPress={handleOrden} style={styles.smallButton} />
-                <TouchableButton title="Cerrar Sesión" onPress={handleLogout} style={styles.smallButton} />
+                <TouchableButton title="Mis ordenes" onPress={handleVerOrden} style={styles.smallButton} />
+                <TouchableButton2 title="Cerrar Sesión" onPress={handleLogout} style={styles.smallButton2} />
             </View>
         );
     } else {
@@ -49,30 +49,48 @@ const TouchableButton = ({ title, onPress, style }) => (
     <TouchableHighlight
         style={[styles.button, style]}
         onPress={onPress}
-        underlayColor="#E0E0E0"
+        underlayColor="#FB7422"
     >
         <Text style={styles.buttonText}>{title}</Text>
     </TouchableHighlight>
 );
 
+const TouchableButton2 = ({ title, onPress, style }) => (
+    <TouchableHighlight
+        style={[styles.button, style]}
+        onPress={onPress}
+        underlayColor="#FFFFFF"
+    >
+        <Text style={styles.buttonText2}>{title}</Text>
+    </TouchableHighlight>
+);
+
 const styles = StyleSheet.create({
     menuContainer: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         position: 'absolute',  
         top: 0,  
         left: 0, 
         marginTop: 100,
     },
     button: {
-        backgroundColor: '#007AFF',
-        padding: 5,
-        margin: 5,
-        borderRadius: 5,
+        padding: 4,
+        margin: 2,
+        borderRadius: 1,
     },
     smallButton: {
-        width: 100,
+        width: 99,
+        backgroundColor: '#F7E9AB',
+    },
+    smallButton2: {
+        width: 99,
+        backgroundColor: '#FF0000',
     },
     buttonText: {
+        color: 'black',
+        textAlign: 'center',
+    },
+    buttonText2: {
         color: 'white',
         textAlign: 'center',
     },

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button, Alert, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ImageBackground, Pressable} from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +13,9 @@ export default function Registro() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
+    const handleLogin = () => {
+        navigation.navigate('Login');
+    };
     const handleRegistro = () => {
         axios.post('http://192.168.20.20:8000/api/registro', {
             name: name,
@@ -20,6 +23,7 @@ export default function Registro() {
             email: email,
             password: password,
         }).then((response) => {
+            Alert.alert('Registro exitoso', 'Inicie sesion con su nueva cuenta.');
             navigation.navigate('Login');
             setName('');
             setPhone('');
@@ -27,6 +31,7 @@ export default function Registro() {
             setPassword('');
         })
             .catch((error) => {
+                Alert.alert('ERROR', 'Error al realizar el REGISTRO.');
                 navigation.navigate('Registro');
                 setName('');
                 setPhone('');
@@ -42,7 +47,14 @@ export default function Registro() {
                 <TextInput style={styles.inputs} placeholder='Celular' onChangeText={(text) => setPhone(text)} value={phone}></TextInput>
                 <TextInput style={styles.inputs} placeholder='Correo' onChangeText={(text) => setEmail(text)} value={email}></TextInput>
                 <TextInput style={styles.inputs} placeholder='Password' secureTextEntry={true} onChangeText={(text) => setPassword(text)} value={password}></TextInput>
-                <Button title="Registrar" onPress={handleRegistro} color="#FF1700" />
+                {/* <Button title="Registrar" onPress={handleRegistro} color="#FF1700" /> */}
+                <Pressable style={styles.buttons} onPress={handleRegistro}>
+                    <Text style={styles.text}>Registrar</Text>
+                </Pressable>
+                {/* <Button title="Login" onPress={handleLogin} color="#FF1700" /> */}
+                <Pressable style={styles.buttons} onPress={handleLogin}>
+                    <Text style={styles.text}>Login</Text>
+                </Pressable>
             </ImageBackground>
         </View>
     );
@@ -67,5 +79,18 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
-    }
+    },
+    buttons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+        padding: 10,
+        borderRadius: 4,
+        width: 100,
+        backgroundColor: '#FF1700',
+    },
+    text: {
+        fontWeight: 'bold',
+        color: 'white',
+      },
 });

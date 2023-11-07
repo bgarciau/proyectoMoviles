@@ -32,17 +32,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [SecurityAuthController::class, 'logout']);
 });
 
-Route::middleware(['auth', 'role:cliente'])->group(function () {
-    Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
-    Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
-    Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
-});
+// Route::middleware(['auth', 'role:cliente'])->group(function () {
+//     Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
+//     Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
+//     Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
+// });
 
-Route::middleware(['auth', 'role:mesero'])->group(function () {
-    Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
-    Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
-    Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
-});
+// Route::middleware(['auth', 'role:mesero'])->group(function () {
+//     Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
+//     Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
+//     Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
+// });
 
 Route::post('login', [SecurityAuthController::class, 'login'])->name('login');
 Route::post('/registro', [userController::class, 'store'])->name('registro.store');

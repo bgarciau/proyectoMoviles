@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('state')->default('pendiente');
             $table->unsignedbigInteger('waiter_id')->nullable();
             $table->foreign('waiter_id')->references('id')->on('users');
-            $table->unsignedbigInteger('client_id');
+            $table->unsignedbigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('users');
             $table->integer('table')->nullable();
             $table->unsignedbigInteger('plate_id')->nullable();
             $table->foreign('plate_id')->references('id')->on('plates');
             $table->unsignedbigInteger('drink_id')->nullable();
             $table->foreign('drink_id')->references('id')->on('drinks');
-            $table->float('total');
+            $table->float('total')->nullable();
             $table->timestamps();
         });
     }

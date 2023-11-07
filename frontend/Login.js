@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, TextInput, Button, Alert, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ImageBackground, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const image = {uri: 'https://i.pinimg.com/564x/cf/e4/9e/cfe49e5d75dfdd785be366c29c338a85.jpg'};
+const image = { uri: 'https://i.pinimg.com/564x/cf/e4/9e/cfe49e5d75dfdd785be366c29c338a85.jpg' };
 
 
 
@@ -25,7 +25,7 @@ export default function Login() {
                 Alert.alert('Bienvenido', 'Inicio de sesión correcto.');
                 const token = response.data.token;
                 AsyncStorage.setItem('token', token);
-                    navigation.navigate('Home');
+                navigation.navigate('Home');
                 setEmail('');
                 setPassword('');
             })
@@ -38,28 +38,34 @@ export default function Login() {
                     navigation.navigate('Login');
                 }
             });
-};
+    };
 
     return (
         <View style={styles.container}>
             <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-            <Text style={{ fontSize: 30, marginBottom: 40,color: 'white', }}>INICIAR SESIÓN</Text>
-            <TextInput
+                <Text style={{ fontSize: 30, marginBottom: 40, color: 'white', }}>INICIAR SESIÓN</Text>
+                <TextInput
 
-                style={styles.inputs}
-                placeholder="Correo electrónico"
-                onChangeText={(text) => setEmail(text)}
-                value={email} 
-            />
-            <TextInput
-                style={styles.inputs}
-                placeholder="Contraseña"
-                onChangeText={(text) => setPassword(text)}
-                secureTextEntry={true}
-                value={password} 
-            />
-            <Button title="Enviar" onPress={handleLogin} color="#FF1700" />
-            <Button title="Registro" onPress={handleRegistro} color="#FF1700" />
+                    style={styles.inputs}
+                    placeholder="Correo electrónico"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                />
+                <TextInput
+                    style={styles.inputs}
+                    placeholder="Contraseña"
+                    onChangeText={(text) => setPassword(text)}
+                    secureTextEntry={true}
+                    value={password}
+                />
+                {/* <Pressable style={styles.buttons} onPress={handleLogin} color="#FF1700" /> */}
+                <Pressable style={styles.buttons} onPress={handleLogin}>
+                    <Text style={styles.text}>Enviar</Text>
+                </Pressable>
+                <Pressable style={styles.buttons} onPress={handleRegistro}>
+                    <Text style={styles.text}>Registro</Text>
+                </Pressable>
+                {/* <Button style={styles.buttons} title="Registro" onPress={handleRegistro} color="#FF1700" /> */}
             </ImageBackground>
         </View>
     );
@@ -73,7 +79,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-      },
+    },
     inputs: {
         backgroundColor: '#F7E9AB',
         textAlign: 'center',
@@ -84,5 +90,18 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
-    }
+    },
+    buttons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+        padding: 10,
+        borderRadius: 4,
+        width: 100,
+        backgroundColor: '#FF1700',
+    },
+    text: {
+        fontWeight: 'bold',
+        color: 'white',
+      },
 });

@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { Card } from '@rneui/themed';
 import Menu from './Menu';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+const image = {uri: 'https://i.pinimg.com/564x/db/5e/5f/db5e5f1b1e36e2ba791d96d56c9b8669.jpg'};
+
 
 const Home = ({ navigation }) => {
     const navigateToScreen = (screenName) => {
@@ -10,25 +13,25 @@ const Home = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Menu navigation={navigation} />
             <View style={styles.cardContainer}>
+                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
                 <Card style={styles.card}>
                     <Card.Title style={{ fontSize: 20 }}>Bienvenido a la Pizzeria</Card.Title>
                     <Text style={{ fontSize: 20, textAlign: 'center' }}>
                         Podrás:
                         {"\n"}
-                        <Text><Icon name="star" size={20} color="#BA0F0F" /> Ver ordenes.</Text>
+                        <Text><Icon name="th-list" size={20} color="#FAEE00" /> Ver ordenes.</Text>
                         {"\n"}
-                        <Text><Icon name="star" size={20} color="#FFD700" /> Realizar orden.</Text>
+                        <Text><Icon name="shopping-cart" size={20} color="#FAEE00" /> Realizar orden.</Text>
                         {"\n"}
                         
                     </Text>
                     <View style={styles.buttonContainer}>
                     </View>
                 </Card>
+                <Menu navigation={navigation} />
+                </ImageBackground>
             </View>
-        </View>
     );
 };
 
@@ -39,9 +42,8 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 100,
+        // justifyContent: 'center',
+        // alignItems: 'center',
     },
     card: {
         width: 300,
@@ -65,6 +67,11 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
     },
+    image: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 });
 
 export default Home;
