@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\plateController;
-use App\Http\Controllers\orderController;
-use App\Http\Controllers\drinkController;
+use App\Http\Controllers\userWebController;
+use App\Http\Controllers\plateWebController;
+use App\Http\Controllers\orderWebController;
+use App\Http\Controllers\drinkWebController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,36 +24,37 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::post('/users', [userController::class, 'store'])->name('users.store');
-    Route::POST('/users', [userController::class, 'store'])->name('users.store');
-    Route::put("users/{id}", [userController::class, 'update'])->name('users.update');
-    Route::delete("users/{id}", [userController::class, 'destroy'])->name('users.destroy');
-    Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
-    Route::POST('/plates', [plateController::class, 'store'])->name('plates.store');
-    Route::put("plates/{id}", [plateController::class, 'update'])->name('plates.update');
-    Route::delete("plates/{id}", [plateController::class, 'destroy'])->name('plates.destroy');
-    Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
-    Route::POST('/drinks', [drinkController::class, 'store'])->name('drinks.store');
-    Route::put("drinks/{id}", [drinkController::class, 'update'])->name('drinks.update');
-    Route::delete("drinks/{id}", [drinkController::class, 'destroy'])->name('drinks.destroy');
-    Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
-    Route::POST('/orders', [orderController::class, 'store'])->name('orders.store');
-    Route::put("orders/{id}", [orderController::class, 'update'])->name('orders.update');
-    Route::delete("orders/{id}", [orderController::class, 'destroy'])->name('orders.destroy');
+    Route::get('/users', [userWebController::class, 'index'])->name('users.index');
+    Route::POST('/users', [userWebController::class, 'store'])->name('users.store');
+    Route::get("users/{id}", [userWebController::class, 'edit'])->name('users.edit');
+    Route::put("users/{id}", [userWebController::class, 'update'])->name('users.update');
+    Route::delete("users/{id}", [userWebController::class, 'destroy'])->name('users.destroy');
+    Route::get('/plates', [plateWebController::class, 'index'])->name('plates.index');
+    Route::put("plates/{id}", [plateWebController::class, 'update'])->name('plates.update');
+    Route::delete("plates/{id}", [plateWebController::class, 'destroy'])->name('plates.destroy');
+    Route::get('/drinks', [drinkWebController::class, 'index'])->name('drinks.index');
+    Route::POST('/drinks', [drinkWebController::class, 'store'])->name('drinks.store');
+    Route::put("drinks/{id}", [drinkWebController::class, 'update'])->name('drinks.update');
+    Route::delete("drinks/{id}", [drinkWebController::class, 'destroy'])->name('drinks.destroy');
+    Route::get('/orders', [orderWebController::class, 'index'])->name('orders.index');
+    Route::POST('/orders', [orderWebController::class, 'store'])->name('orders.store');
+    Route::put("orders/{id}", [orderWebController::class, 'update'])->name('orders.update');
+    Route::delete("orders/{id}", [orderWebController::class, 'destroy'])->name('orders.destroy');
 });
 
 Route::middleware(['auth', 'role:cliente'])->group(function () {
-    Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
-    Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
-    Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
+    Route::get('/plates', [plateWebController::class, 'index'])->name('plates.index');
+    Route::get('/drinks', [drinkWebController::class, 'index'])->name('drinks.index');
+    Route::post('/orders', [orderWebController::class, 'store'])->name('orders.store');
 });
 
 Route::middleware(['auth', 'role:mesero'])->group(function () {
-    Route::get('/plates', [plateController::class, 'index'])->name('plates.index');
-    Route::get('/drinks', [drinkController::class, 'index'])->name('drinks.index');
-    Route::post('/orders', [orderController::class, 'store'])->name('orders.store');
+    Route::get('/plates', [plateWebController::class, 'index'])->name('plates.index');
+    Route::get('/drinks', [drinkWebController::class, 'index'])->name('drinks.index');
+    Route::post('/orders', [orderWebController::class, 'store'])->name('orders.store');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

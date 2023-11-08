@@ -9,12 +9,30 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <p>{{ __('Tu rol es: ') }} {{ Auth::user()->role->name }}</p>
+
+                    @if (Auth::check())
+                    @switch(Auth::user()->role->name)
+                    @case('admin')
+                    <a href="{{ route('users.index') }}">Usuarios</a>
+                    <a href="{{ route('plates.index') }}">Platillos</a>
+                    <a href="{{ route('drinks.index') }}">Bebidas</a>
+                    <a href="{{ route('orders.index') }}">Ordenes</a>
+                    @break
+                    @case('mesero')
+                    <a href="{{ route('plates.index') }}">Platillos</a>
+                    <a href="{{ route('drinks.index') }}">Bebidas</a>
+                    <a href="{{ route('orders.index') }}">Ordenes</a>
+                    @break
+                    @default
+                    @endswitch
+                    @endif
+                    {{ __('Estás logueado!') }}
                 </div>
             </div>
         </div>
