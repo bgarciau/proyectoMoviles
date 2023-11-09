@@ -77,7 +77,6 @@ class plateWebController extends Controller
     {
         $plate = plate::find($id);
         $plate -> delete();
-        $plate -> save();
-        return json_encode(["success" => true, "message" => "platillo eliminado exitosamente!"]);
+        return redirect()->route('plates.index')->with('success', 'Platillo eliminado exitosamente!');
     }
 }

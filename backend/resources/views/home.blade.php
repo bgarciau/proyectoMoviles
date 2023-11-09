@@ -23,16 +23,12 @@
                     <a href="{{ route('plates.index') }}">Platillos</a>
                     <a href="{{ route('drinks.index') }}">Bebidas</a>
                     <a href="{{ route('orders.index') }}">Ordenes</a>
-                    @break
-                    @case('mesero')
-                    <a href="{{ route('plates.index') }}">Platillos</a>
-                    <a href="{{ route('drinks.index') }}">Bebidas</a>
-                    <a href="{{ route('orders.index') }}">Ordenes</a>
+                    <a href="{{ route('role.index') }}">Roles</a>
                     @break
                     @default
                     @endswitch
                     @endif
-                    {{ __('Estás logueado!') }}
+                    <!-- {{ __('Estás logueado!') }} -->
                 </div>
             </div>
         </div>

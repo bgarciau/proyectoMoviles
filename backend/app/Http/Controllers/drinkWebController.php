@@ -14,7 +14,7 @@ class drinkWebController extends Controller
     public function index()
     {
         $drinks = drink::all();
-        return json_encode(["drinks" => $drinks]);
+        return view("drinks.index", ["drinks" => $drinks]);
     }
 
     /**
@@ -36,7 +36,7 @@ class drinkWebController extends Controller
         $drink -> price = $request -> price;
         $drink -> stock = $request -> stock;
         $drink -> save();
-        return json_encode(["success" => true, "message" => "bebida creada exitosamente!"]);
+        return redirect()->route('drinks.index')->with('success', 'bebida creada exitosamente!');
     }
 
     /**
@@ -52,7 +52,8 @@ class drinkWebController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $drink = drink::find($id);
+        return view("drinks.edit", ["drink" => $drink]);
     }
 
     /**
@@ -66,7 +67,8 @@ class drinkWebController extends Controller
         $drink -> price = $request -> price;
         $drink -> stock = $request -> stock;
         $drink -> save();
-        return json_encode(["success" => true, "message" => "bebida actualizada exitosamente!"]);
+        return redirect()->route('drinks.index')->with('success', 'bebida actualizada exitosamente!');
+    
     }
 
     /**
@@ -76,7 +78,6 @@ class drinkWebController extends Controller
     {
         $drink = drink::find($id);
         $drink -> delete();
-        $drink -> save();
-        return json_encode(["success" => true, "message" => "bebida eliminada exitosamente!"]);
+        return redirect()->route('drinks.index')->with('success', 'bebida eliminadaexitosamente!');
     }
 }

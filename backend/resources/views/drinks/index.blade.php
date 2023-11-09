@@ -6,44 +6,44 @@
         <div>
             <div class="p-1">
                 <div class="text-center">
-                    <h2>Usuarios</h2>
+                    <h2>Bebidas</h2>
                     <button class="btn btn-success btn-sm mb-3" id="btnAgregar"><i class="bi bi-plus-square-dotted">
                             AGREGAR</i></button>
                 </div>
-                <!-- TABLA CON LOS DATOS-->
+                <!-- TABLA CON LOS DATOS -->
                 <div class="overflow-x-scroll">
-                    <table id="tablaUsuarios" class="table table-bordered table-striped table-hover">
+                    <table id="tabla" class="table table-bordered table-striped table-hover">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Rol</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($drinks as $drink)
                             <tr>
                                 <td scope="row">
-                                    {{ $user->id }}
+                                    {{ $drink->id }}
                                 </td>
                                 <td>
-                                    {{ $user->role->name  }}
+                                    {{ $drink->name }}
                                 </td>
                                 <td>
-                                    {{ $user->name }}
+                                    {{ $drink->description }}
                                 </td>
                                 <td>
-                                    {{ $user->phone }}
+                                    {{ $drink->price }}
                                 </td>
                                 <td>
-                                    {{ $user->email }}
+                                    {{ $drink->stock }}
                                 </td>
                                 <td>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                                    <form action="{{ route('drinks.destroy', $drink->id) }}" method="POST">
+                                        <a href="{{ route('drinks.edit', $drink->id) }}" class="btn btn-warning btn-sm">Editar</a>
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Estas seguro de eliminar?');" type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -64,39 +64,27 @@
 <dialog id="dialogAgregar" style="min-width: 50%;">
     <div class="card">
         <div class="text-center">
-            <h3>AGREGAR USUARIO</h3>
+            <h3>AGREGAR Bebida</h3>
         </div>
-        <form action="{{ route('users.store') }}" method="POST">
+        <form action="{{ route('drinks.store') }}" method="POST">
             @csrf
             @method('POST')
 
             <div class="mb-3">
-                <label class="form-label">NOMBRE USUARIO: </label>
+                <label class="form-label">NOMBRE BEBIDA: </label>
                 <input type="text" class="form-control" name="name" value="" autofocus required>
             </div>
             <div class="mb-3">
-                <label class="form-label">ROL USUARIO: </label>
-                <select class="form-select" aria-label="Default select example" name="tipoUsuario">
-                    <option value=2>CLIENTE</option>
-                    <option value=1>MESERO</option>
-                    <option value=3>ADMINISTRADOR</option>
-                </select>
+                <label class="form-label">DESCRIPCION: </label>
+                <input type="text" class="form-control" name="description" value="" autofocus required>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="phone">TELEFONO:</label>
-                <input type="text" name="phone" id="phone" class="form-control" required>
+                <label class="form-label" for="price">PRECIO:</label>
+                <input type="float" name="price" id="price" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="email">CORREO:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="email">CONTRASENA:</label>
-                <input type="password" name="password" id="password" placeholder="Contraseña: " class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="email">CONFIRME CONTRASENA:</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirme su contraseña: " class="form-control" required>
+                <label class="form-label" for="email">STOCK:</label>
+                <input type="stock" name="stock" id="stock" class="form-control" required>
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">
@@ -109,7 +97,7 @@
     </div>
 </dialog>
 <script>
-    $('#tablaUsuarios').DataTable({
+    $('#tabla').DataTable({
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
         }
