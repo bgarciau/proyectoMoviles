@@ -43,6 +43,8 @@ export default function Login() {
     return (
         <View style={styles.container}>
             <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+            <Text style={{ fontSize: 30, marginBottom: 40, color: 'white', }}>WILLY's PIZZA
+</Text>
                 <Text style={{ fontSize: 30, marginBottom: 40, color: 'white', }}>INICIAR SESIÓN</Text>
                 <TextInput
 

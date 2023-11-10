@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
             <View style={styles.cardContainer}>
                 <ImageBackground source={image} resizeMode="cover" style={styles.image}>
                 <Card style={styles.card}>
-                    <Card.Title style={{ fontSize: 20 }}>Bienvenido a la Pizzeria</Card.Title>
+                    <Card.Title style={{ fontSize: 20 }}>Bienvenido a Willy's Pizza</Card.Title>
                     <Text style={{ fontSize: 20, textAlign: 'center' }}>
                         Podrás:
                         {"\n"}
