@@ -63,7 +63,11 @@ class orderWebController extends Controller
     public function edit(string $id)
     {
         $order = order::find($id);
-        return view("orders.edit", ["order" => $order]);
+        $meseros = User::where('role_id',1 )->get();
+        $clientes = User::where('role_id',2 )->get();
+        $plates = plate::all();
+        $drinks = drink::all();
+        return view("orders.edit", ["order" => $order,"meseros" => $meseros,"clientes" => $clientes,"plates" => $plates,"drinks" => $drinks]);
     }
 
     /**
@@ -90,7 +94,6 @@ class orderWebController extends Controller
     {
         $order = order::find($id);
         $order -> delete();
-        $order -> save();
         return redirect()->route('orders.index')->with('success', 'Orden eliminada exitosamente!');
     }
 }

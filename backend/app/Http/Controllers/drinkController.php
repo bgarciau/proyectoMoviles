@@ -76,7 +76,6 @@ class drinkController extends Controller
     {
         $drink = drink::find($id);
         $drink -> delete();
-        $drink -> save();
         return json_encode(["success" => true, "message" => "bebida eliminada exitosamente!"]);
     }
 }

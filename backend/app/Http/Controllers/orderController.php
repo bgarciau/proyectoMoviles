@@ -82,7 +82,6 @@ class orderController extends Controller
     {
         $order = order::find($id);
         $order -> delete();
-        $order -> save();
         return json_encode(["success" => true, "message" => "orden eliminada exitosamente!"]);
     }
 }
