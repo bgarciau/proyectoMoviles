@@ -13,6 +13,7 @@ class orderController extends Controller
      */
     public function index()
     {
+        // $orders = order::where('clien_id', $id)->get();
         $orders = order::all();
         return json_encode(["orders" => $orders]);
     }

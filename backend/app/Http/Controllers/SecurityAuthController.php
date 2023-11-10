@@ -32,7 +32,7 @@ class SecurityAuthController extends Controller
         $token = $user->createToken('authToken')->plainTextToken;
         // Retornamos solo el token en formato de texto plano
         return response()->json([
-            'token' => $token
+            'token' => $token,
         ], 200);
     }
 
