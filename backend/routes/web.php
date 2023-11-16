@@ -52,18 +52,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete("orders/{id}", [orderWebController::class, 'destroy'])->name('orders.destroy');
 });
 
-// Route::middleware(['auth', 'role:cliente'])->group(function () {
-//     Route::get('/plates', [plateWebController::class, 'index'])->name('plates.index');
-//     Route::get('/drinks', [drinkWebController::class, 'index'])->name('drinks.index');
-//     Route::post('/orders', [orderWebController::class, 'store'])->name('orders.store');
-// });
-
-// Route::middleware(['auth', 'role:mesero'])->group(function () {
-//     Route::get('/plates', [plateWebController::class, 'index'])->name('plates.index');
-//     Route::get('/drinks', [drinkWebController::class, 'index'])->name('drinks.index');
-//     Route::post('/orders', [orderWebController::class, 'store'])->name('orders.store');
-// });
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

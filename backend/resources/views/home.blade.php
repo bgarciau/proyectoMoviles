@@ -24,6 +24,7 @@
                     <a href="{{ route('drinks.index') }}">Bebidas</a>
                     <a href="{{ route('orders.index') }}">Ordenes</a>
                     <a href="{{ route('role.index') }}">Roles</a>
+                    <a href="">Reportes</a>
                     @break
                     @default
                     @endswitch

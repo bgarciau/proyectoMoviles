@@ -24,7 +24,10 @@ yarn install
 
 expo start
 
+administrador:
 
+admin@admin.com
+admin
 
 
 
