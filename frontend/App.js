@@ -6,7 +6,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <Enrutamiento />
-      <Text style={styles.foot}>Desarrollado por: Brayan Garcia para la asignatura Programación con Tecnologías Móviles</Text>
+      <Text style={styles.foot}>Desarrollado por: Brayan Garcia - Carlos Gallego para la asignatura Programación con Tecnologías Móviles</Text>
     </View>
   );
 };
