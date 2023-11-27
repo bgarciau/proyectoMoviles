@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="min-height: 85vh;">
-    <div class="container bg-white py-4">
+    <div class="container bg-dark text-light py-4">
         <div>
             <div class="p-1">
                 <div class="text-center">
@@ -12,7 +12,7 @@
                 </div>
                 <!-- TABLA CON LOS DATOS -->
                 <div class="overflow-x-scroll">
-                    <table id="tabla" class="table table-bordered table-striped table-hover">
+                    <table id="tabla" class="table table-sm table-bordered table-striped table-hover table-warning">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -61,8 +61,8 @@
     </div>
 </div>
 <!-- DIALOG PARA AGREGAR -->
-<dialog id="dialogAgregar" style="min-width: 50%;">
-    <div class="card">
+<dialog id="dialogAgregar" style="min-width: 50%; background-color: hsla(50, 100%, 50%, 0.801);">
+    <div class="card" style="background-color: hsla(54, 100%, 50%, 0.8);">
         <div class="text-center">
             <h3>AGREGAR Bebida</h3>
         </div>
@@ -72,19 +72,19 @@
 
             <div class="mb-3">
                 <label class="form-label">NOMBRE BEBIDA: </label>
-                <input type="text" class="form-control" name="name" value="" autofocus required>
+                <input type="text" style="background-color: lightgoldenrodyellow" class="form-control" name="name" value="" autofocus required>
             </div>
             <div class="mb-3">
                 <label class="form-label">DESCRIPCION: </label>
-                <input type="text" class="form-control" name="description" value="" autofocus required>
+                <input type="text" style="background-color: lightgoldenrodyellow" class="form-control" name="description" value="" autofocus required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">PRECIO:</label>
-                <input type="float" name="price" id="price" class="form-control" required>
+                <input type="float" style="background-color: lightgoldenrodyellow" name="price" id="price" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="email">STOCK:</label>
-                <input type="stock" name="stock" id="stock" class="form-control" required>
+                <input type="stock" style="background-color: lightgoldenrodyellow" name="stock" id="stock" class="form-control" required>
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">

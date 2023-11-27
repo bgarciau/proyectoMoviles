@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="min-height: 85vh;">
-    <div class="container bg-white py-4">
+    <div class="container bg-dark text-light py-4">
         <div>
             <div class="p-1">
                 <div class="text-center">
@@ -12,7 +12,7 @@
                 </div>
                 <!-- TABLA CON LOS DATOS -->
                 <div class="overflow-x-scroll">
-                    <table id="tabla" class="table table-bordered table-striped table-hover">
+                    <table id="tabla" class="table table-sm table-bordered table-striped table-hover table-warning">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -73,8 +73,8 @@
     </div>
 </div>
 <!-- DIALOG PARA AGREGAR -->
-<dialog id="dialogAgregar" style="min-width: 50%;">
-    <div class="card">
+<dialog id="dialogAgregar" style="min-width: 50%; background-color: hsla(50, 100%, 50%, 0.801);">
+    <div class="card" style="background-color: hsla(54, 100%, 50%, 0.8);">
         <div class="text-center">
             <h3>AGREGAR ORDEN</h3>
         </div>
@@ -84,7 +84,7 @@
 
             <div class="mb-3">
                 <label class="form-label">ESTADO: </label>
-                <select class="form-select" aria-label="Default select example" name="state">
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="state">
                     <option value='pendiente'>pendiente</option>
                     <option value='finalizado'>finalizado</option>
                 </select>
@@ -93,7 +93,7 @@
                 <label class="form-label">MESERO: </label>
                 <br>
 
-                <select class="form-select" aria-label="Default select example" name="waiter_id" id="meseros">
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="waiter_id" id="meseros">
                 <option value= >Seleccione un mesero </option>    
                 @foreach ($meseros as $mesero)
                     <option value="{{ $mesero->id }}">{{ $mesero->id }} ~ {{ $mesero->name }}</option>
@@ -103,20 +103,20 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="client_id">CLIENTE:</label>
-                 <select class="form-select" aria-label="Default select example" name="client_id" id="clientes">
-                 <option value= >Seleccione un cliente </option>   
-                 @foreach ($clientes as $cliente)
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="client_id" id="clientes">
+                <option value= >Seleccione un cliente </option>   
+                @foreach ($clientes as $cliente)
                     <option value="{{ $cliente->id }}">{{ $cliente->id }} ~ {{ $cliente->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="table">MESA:</label>
-                <input type="number" name="table" id="table" class="form-control" >
+                <input type="number" style="background-color: lightgoldenrodyellow" name="table" id="table" class="form-control" >
             </div>
             <div class="mb-3">
                 <label class="form-label" for="plate_id">PLATO:</label>
-                <select class="form-select" aria-label="Default select example" name="plate_id" id="platillos">
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="plate_id" id="platillos">
                 <option value= >Seleccione un platillo </option>    
                 @foreach ($plates as $plate)
                     <option value="{{ $plate->id }}">{{ $plate->id }} ~ {{ $plate->name }} : {{ $plate->description }} : ${{ $plate->price }}</option>
@@ -125,7 +125,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="drink_id">BEBIDA:</label>
-                <select class="form-select" aria-label="Default select example" name="plate_id" id="platillos">
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="plate_id" id="platillos">
                 <option value= >Seleccione una bebida </option>
                     @foreach ($drinks as $drink)
                     <option value="{{ $drink->id }}">{{ $drink->id }} ~ {{ $drink->name }} : {{ $drink->description }} : ${{ $drink->price }}</option>
@@ -134,7 +134,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="total">TOTAL:</label>
-                <input type="text" name="total" id="total" class="form-control" >
+                <input type="text" style="background-color: lightgoldenrodyellow" name="total" id="total" class="form-control" >
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">

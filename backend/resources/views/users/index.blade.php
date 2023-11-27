@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="min-height: 85vh;">
-    <div class="container bg-white py-4">
+    <div class="container bg-dark text-light py-4">
         <div>
             <div class="p-1">
                 <div class="text-center">
@@ -12,7 +12,7 @@
                 </div>
                 <!-- TABLA CON LOS DATOS-->
                 <div class="overflow-x-scroll">
-                    <table id="tablaUsuarios" class="table table-bordered table-striped table-hover">
+                    <table id="tablaUsuarios" class="table table-sm table-bordered table-striped table-hover table-warning">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -61,8 +61,8 @@
     </div>
 </div>
 <!-- DIALOG PARA AGREGAR -->
-<dialog id="dialogAgregar" style="min-width: 50%;">
-    <div class="card">
+<dialog id="dialogAgregar" style="min-width: 50%; background-color: hsla(50, 100%, 50%, 0.801);">
+    <div class="card" style="background-color: hsla(54, 100%, 50%, 0.8);">
         <div class="text-center">
             <h3>AGREGAR USUARIO</h3>
         </div>
@@ -72,11 +72,11 @@
 
             <div class="mb-3">
                 <label class="form-label">NOMBRE USUARIO: </label>
-                <input type="text" class="form-control" name="name" value="" autofocus required>
+                <input type="text" style="background-color: lightgoldenrodyellow" class="form-control"  name="name" value="" autofocus required>
             </div>
             <div class="mb-3">
                 <label class="form-label">ROL USUARIO: </label>
-                <select class="form-select" aria-label="Default select example" name="tipoUsuario">
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="tipoUsuario">
                     <option value=2>CLIENTE</option>
                     <option value=1>MESERO</option>
                     <option value=3>ADMINISTRADOR</option>
@@ -84,19 +84,19 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="phone">TELEFONO:</label>
-                <input type="text" name="phone" id="phone" class="form-control" required>
+                <input type="text" style="background-color: lightgoldenrodyellow" name="phone" id="phone" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="email">CORREO:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <input type="email" style="background-color: lightgoldenrodyellow" name="email" id="email" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="email">CONTRASENA:</label>
-                <input type="password" name="password" id="password" placeholder="Contraseña: " class="form-control" required>
+                <input type="password" style="background-color: lightgoldenrodyellow" name="password" id="password" placeholder="Contraseña: " class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="email">CONFIRME CONTRASENA:</label>
-                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirme su contraseña: " class="form-control" required>
+                <input type="password" style="background-color: lightgoldenrodyellow" name="password_confirmation" id="password_confirmation" placeholder="Confirme su contraseña: " class="form-control" required>
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">

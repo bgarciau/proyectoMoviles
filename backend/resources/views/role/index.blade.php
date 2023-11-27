@@ -2,7 +2,7 @@
 
 @section('content')
 <div style="min-height: 85vh;">
-    <div class="container bg-white py-4">
+    <div class="container bg-dark text-light py-4">
         <div>
             <div class="p-1">
                 <div class="text-center">
@@ -12,7 +12,7 @@
                 </div>
                 <!-- TABLA CON LOS DATOS -->
                 <div class="overflow-x-scroll">
-                    <table id="tabla" class="table table-bordered table-striped table-hover">
+                    <table id="tabla" class="table table-sm table-bordered table-striped table-hover table-warning">
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
@@ -49,10 +49,10 @@
     </div>
 </div>
 <!-- DIALOG PARA AGREGAR -->
-<dialog id="dialogAgregar" style="min-width: 50%;">
-    <div class="card">
+<dialog id="dialogAgregar" style="min-width: 50%; background-color: hsla(41, 100%, 50%, 0.801);">
+    <div class="card" style="background-color: hsla(54, 100%, 50%, 0.8);">
         <div class="text-center">
-            <h3>AGREGAR ROLE</h3>
+            <h3>AGREGAR ROL</h3>
         </div>
         <form action="{{ route('role.store') }}" method="POST">
             @csrf
@@ -60,7 +60,7 @@
 
             <div class="mb-3">
                 <label class="form-label">NOMBRE: </label>
-                <input type="text" class="form-control" name="name" value="" autofocus required>
+                <input type="text" style="background-color: lightgoldenrodyellow" class="form-control" name="name" value="" autofocus required>
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">

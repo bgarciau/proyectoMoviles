@@ -29,9 +29,9 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body>
+<body style="background-image: url('https://i.pinimg.com/originals/88/73/85/88738596c6a87cf1ed4c121193e81a10.jpg'); background-size: cover; background-position: 50% 20%; background-color: #0f0c0cef;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-dark text-white shadow-sm">
             <div class="container">
                 <!-- Logo -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -72,7 +72,7 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none" >
                                     @csrf
                                 </form>
                             </div>
@@ -83,7 +83,7 @@
             </div>
         </nav>
         <!-- datatable -->
-        <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/dt-1.13.7/datatables.min.js"></script>
         <main class="py-4">
             @yield('content')
         </main>
