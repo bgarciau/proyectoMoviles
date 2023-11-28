@@ -16,7 +16,7 @@ const VerOrden = ({ navigation }) => {
             if (error) {
               console.error('Error al obtener el token:', error);
             } else if (userToken) {
-        axios.get('http://192.168.20.20:8000/api/orders',{
+        axios.get('http://192.168.123.80:8000/api/orders',{
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${userToken}`,

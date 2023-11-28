@@ -10,7 +10,7 @@ const Logout = ({ navigation }) => {
           console.error('Error al obtener el token:', error);
         } else if (userToken) {
           // Petición
-          fetch('http://192.168.20.20:8000/api/logout', {
+          fetch('http://192.168.123.80:8000/api/logout', {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${userToken}`,

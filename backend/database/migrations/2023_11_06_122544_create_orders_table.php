@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedbigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('users');
             $table->integer('table')->nullable();
+            $table->string('direcc')->nullable();
             $table->unsignedbigInteger('plate_id')->nullable();
             $table->foreign('plate_id')->references('id')->on('plates');
             $table->unsignedbigInteger('drink_id')->nullable();

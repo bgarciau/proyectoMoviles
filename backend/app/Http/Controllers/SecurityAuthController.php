@@ -30,9 +30,11 @@ class SecurityAuthController extends Controller
         // Si las credenciales son correctas, generamos un token para el usuario
         $user = $request->user();
         $token = $user->createToken('authToken')->plainTextToken;
+        $tipo = (int)$user->role_id;
         // Retornamos solo el token en formato de texto plano
         return response()->json([
             'token' => $token,
+            'tipo' => $tipo,	
         ], 200);
     }
 

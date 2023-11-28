@@ -17,15 +17,16 @@ export default function Login() {
         navigation.navigate('Registro');
     };
     const handleLogin = () => {
-        axios.post('http://192.168.20.20:8000/api/login', {
+        axios.post('http://192.168.123.80:8000/api/login', {
             email: email,
             password: password,
         })
             .then((response) => {
-                Alert.alert('Bienvenido', 'Inicio de sesión correcto.');
                 const token = response.data.token;
+                const tipo = response.data.tipo.toString();
                 AsyncStorage.setItem('token', token);
-                navigation.navigate('Home');
+                AsyncStorage.setItem('tipo', tipo);
+                    navigation.navigate('Home');
                 setEmail('');
                 setPassword('');
             })
@@ -33,7 +34,12 @@ export default function Login() {
                 if (error.response && error.response.status === 401) {
                     alert('Contraseña incorrecta. Inténtalo de nuevo.');
                     navigation.navigate('Login');
+                } else if (error.response) {
+                    console.log(error.response); // Agrega esta línea para ver la respuesta completa del error
+                    Alert.alert('Error',error);
+                    navigation.navigate('Login');
                 } else {
+                    console.log(error); // Agrega esta línea para ver otros errores que puedan ocurrir
                     Alert.alert('Error', 'Error al iniciar sesión. Inténtalo de nuevo.');
                     navigation.navigate('Login');
                 }
@@ -44,7 +50,7 @@ export default function Login() {
         <View style={styles.container}>
             <ImageBackground source={image} resizeMode="cover" style={styles.image}>
             <Text style={{ fontSize: 30, marginBottom: 40, color: 'white', }}>WILLY's PIZZA
-</Text>
+            </Text>
                 <Text style={{ fontSize: 30, marginBottom: 40, color: 'white', }}>INICIAR SESIÓN</Text>
                 <TextInput
 
@@ -60,7 +66,7 @@ export default function Login() {
                     secureTextEntry={true}
                     value={password}
                 />
-                {/* <Pressable style={styles.buttons} onPress={handleLogin} color="#FF1700" /> */}
+                {/* <Button style={styles.buttons} onPress={handleLogin} color="#FF1700" /> */}
                 <Pressable style={styles.buttons} onPress={handleLogin}>
                     <Text style={styles.text}>Enviar</Text>
                 </Pressable>

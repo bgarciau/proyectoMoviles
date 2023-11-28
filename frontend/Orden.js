@@ -13,8 +13,9 @@ const image = { uri: 'https://i.pinimg.com/564x/86/92/22/869222126d19f9969f05f67
 
 export default function Orden() {
     const [waiter_id, setWaiter_id] = useState('');
-    const [client_id, setClient_id] = useState('');
+    const [tipo, setTipo] = useState();
     const [table, setTable] = useState('');
+    const [direccion, setDirec] = useState('');
     const [plate_id, setPlate_id] = useState('');
     const [drink_id, setDrink_id] = useState('');
     const [total, setTotal] = useState('');
@@ -29,34 +30,41 @@ export default function Orden() {
             if (error) {
                 console.error('Error al obtener el token:', error);
             } else if (userToken) {
-                axios.get('http://192.168.20.20:8000/api/plates', {
+                axios.get('http://192.168.123.80:8000/api/plates', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${userToken}`,
                     },
                 }).then(response => {
                     let newArray = response.data.plates.map((item) => {
-                        return { key: item.id, value: item.name }
+                        return { key: item.id, value: `${item.name} - $${item.price}`, price: item.price };
                     })
                     setPlates(newArray);
                 })
                     .catch(error => {
                         console.error(error);
                     })
-                axios.get('http://192.168.20.20:8000/api/drinks', {
+                axios.get('http://192.168.123.80:8000/api/drinks', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${userToken}`,
                     },
                 }).then(response => {
                     let newArray2 = response.data.drinks.map((item) => {
-                        return { key: item.id, value: item.name }
+                        return { key: item.id, value: `${item.name} - $${item.price}`, price: item.price };
                     })
                     setDrinks(newArray2);
                 })
                     .catch(error => {
                         console.error(error);
                     })
+            }
+        })
+        AsyncStorage.getItem('tipo', function (error, userTipo) {
+            if (error) {
+                console.error('Error al obtener el tipo:', error);
+            } else if (userTipo) {
+                setTipo(userTipo);
             }
         })
     }, []);
@@ -72,18 +80,18 @@ export default function Orden() {
 
                 const bodyParameters = {
                     table: table,
+                    direccion: direccion,
                     plate_id: plate_id,
                     drink_id: drink_id
                 };
 
                 axios.post(
-                    'http://192.168.20.20:8000/api/orders',
+                    'http://192.168.123.80:8000/api/orders',
                     bodyParameters,
                     config
                 ).then((response) => {
                     navigation.navigate('VerOrden');
                     setWaiter_id('');
-                    setClient_id('');
                     setTable('');
                     setPlate_id('');
                     setDrink_id('');
@@ -92,7 +100,6 @@ export default function Orden() {
                     .catch((error) => {
                         navigation.navigate('Orden');
                         setWaiter_id('');
-                        setClient_id('');
                         setTable('');
                         setPlate_id('');
                         setDrink_id('');
@@ -103,32 +110,63 @@ export default function Orden() {
             }
         });
     };
-    return (
-        <View style={styles.container}>
-            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>Nueva orden</Text>
-                {/* <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>{plates}</Text> */}
-                <TextInput style={styles.inputs} placeholder='Mesa' keyboardType="numeric" onChangeText={(text) => setTable(text)} value={table} ></TextInput>
-                <SelectList 
-                    setSelected={setPlate_id}
-                    data={plates}
-                    boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
-                    dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
-                    placeholder='Seleccionar platillo'
-                />
-                <SelectList
-                    setSelected={setDrink_id}
-                    data={drinks}
-                    boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
-                    dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
-                    placeholder='Seleccionar bebida'
-                />
-                <Button title="Ordenar" onPress={handleOrden} color="#FF1700" />
-                <Menu navigation={navigation} />
-            </ImageBackground>
-        </View>
-    );
-}
+    if(tipo == 2){
+        return (
+            <View style={styles.container}>
+                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                    <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>Nueva orden</Text>
+                    {/* <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>{plates}</Text> */}
+                    <TextInput style={styles.inputs} placeholder='Direccion' onChangeText={(text) => setDirec(text)} value={direccion} ></TextInput>
+                    <SelectList 
+                        setSelected={setPlate_id}
+                        data={plates}
+                        boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
+                        dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
+                        placeholder='Seleccionar platillo'
+                    />
+                    <SelectList
+                        setSelected={setDrink_id}
+                        data={drinks}
+                        boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
+                        dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
+                        placeholder='Seleccionar bebida'
+                    />
+                    <Button title="Ordenar" onPress={handleOrden} color="#FF1700" />
+                    <Menu navigation={navigation} />
+                </ImageBackground>
+            </View>
+        );
+    }
+    else{
+        return (
+            <View style={styles.container}>
+                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                    <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>Nueva orden</Text>
+                    {/* <Text style={{ fontSize: 30, marginBottom: 40, color: 'white' }}>{plates}</Text> */}
+                    <TextInput style={styles.inputs} placeholder='Mesa' keyboardType="numeric" onChangeText={(text) => setTable(text)} value={table} ></TextInput>
+                    <SelectList 
+                        setSelected={setPlate_id}
+                        data={plates}
+                        boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
+                        dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
+                        placeholder='Seleccionar platillo'
+                    />
+                    <SelectList
+                        setSelected={setDrink_id}
+                        data={drinks}
+                        boxStyles={{ backgroundColor: '#F7E9AB',margin: 10 }} 
+                        dropdownStyles={{ backgroundColor: '#F7E9AB' }} 
+                        placeholder='Seleccionar bebida'
+                    />
+                    <Button title="Ordenar" onPress={handleOrden} color="#FF1700" />
+                    <Menu navigation={navigation} />
+                </ImageBackground>
+            </View>
+        );
+    }
+
+    }
+  
 
 const styles = StyleSheet.create({
     container: {

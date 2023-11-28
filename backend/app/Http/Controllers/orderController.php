@@ -35,6 +35,7 @@ class orderController extends Controller
         $order->waiter_id = $request->waiter_id;
         $order->client_id = $request->client_id;
         $order->table = $request->table;
+        $order->direccion = $request->direccion;
         $order->plate_id = $request->plate_id;
         $order->drink_id = $request->drink_id;
         $order->total = $request->total;
@@ -68,6 +69,7 @@ class orderController extends Controller
         $order->waiter_id = $request->waiter_id;
         $order->client_id = $request->client_id;
         $order->table = $request->table;
+        $order->direccion = $request->direccion;
         $order->plate_id = $request->plate_id;
         $order->drink_id = $request->drink_id;
         $order->total = $request->total;

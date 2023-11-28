@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, ImageBackground, Pres
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const image = { uri: 'https://i.pinimg.com/564x/cf/e4/9e/cfe49e5d75dfdd785be366c29c338a85.jpg' };
 
@@ -17,7 +17,7 @@ export default function Registro() {
         navigation.navigate('Login');
     };
     const handleRegistro = () => {
-        axios.post('http://192.168.20.20:8000/api/registro', {
+        axios.post('http://192.168.123.80:8000/api/registro', {
             name: name,
             phone: phone,
             email: email,
@@ -31,12 +31,12 @@ export default function Registro() {
             setPassword('');
         })
             .catch((error) => {
-                Alert.alert('ERROR', 'Error al realizar el REGISTRO.');
+                Alert.alert('ERROR', '(Error al realizar el REGISTRO.)');
                 navigation.navigate('Registro');
-                setName('');
-                setPhone('');
-                setEmail('');
-                setPassword('');
+                //setName('');
+                //setPhone('');
+                //setEmail('');
+                //setPassword('');
             });
     };
     return (
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF1700',
     },
     text: {
+
         fontWeight: 'bold',
         color: 'white',
       },
