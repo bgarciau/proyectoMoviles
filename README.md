@@ -1,6 +1,7 @@
 # proyectoMoviles
 
 Brayan Garcia Useda - 1002636273
+Carlos Ivan Gallego - 1053826685
 
 migraciones:
 
