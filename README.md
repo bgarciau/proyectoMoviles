@@ -31,5 +31,6 @@ admin@admin.com
 admin
 
 Microservicio:
-
+yarn install
+npx nodemon app.js
 
