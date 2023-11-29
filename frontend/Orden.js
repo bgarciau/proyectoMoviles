@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button, ImageBackground,Alert  } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ImageBackground, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -86,7 +86,7 @@ export default function Orden() {
                 const separatedPlates = plate_id.split("-");
 
                 const plate_id2 = separatedPlates[0]; // Valor a la izquierda del "-"
-                const precioPlate =parseFloat(separatedPlates[1].replace('$', '')); // Valor a la derecha del "-"
+                const precioPlate = parseFloat(separatedPlates[1].replace('$', '')); // Valor a la derecha del "-"
 
                 const total = precioDrink + precioPlate;
 
@@ -95,47 +95,61 @@ export default function Orden() {
                     'Confirmación Pedido',
                     mensaje,
                     [
-                      {
-                        text: 'Cancelar',
-                        style: 'cancel',
-                      },
-                      {
-                        text: 'Aceptar',
-                        onPress: () => {
-                          let bodyParameters = {
-                            table: table,
-                            direccion: direccion,
-                            plate_id: plate_id2,
-                            drink_id: drink_id2,
-                            user_id: id,
-                            total: total
-                        };
-        
-                        axios.post(
-                            'http://192.168.20.20:8000/api/orders',
-                            bodyParameters,
-                            config
-                        ).then((response) => {
-                            setPlate_id('');
-                            setDrink_id('');
-                            setDirec('');
-                            setTable('');
-                            navigation.navigate('VerOrden');
-                        })
-                            .catch((error) => {
-                                console.error("Eroor", error);
-                                setDirec('');
-                                setTable('');
-                                setPlate_id('');
-                                setDrink_id('');
-                                navigation.navigate('Orden');
-                            });
-                          console.log('Pedido realizado');
+                        {
+                            text: 'Cancelar',
+                            style: 'cancel',
                         },
-                      },
+                        {
+                            text: 'Aceptar',
+                            onPress: () => {
+                                let bodyParameters = {
+                                    table: table,
+                                    direccion: direccion,
+                                    plate_id: plate_id2,
+                                    drink_id: drink_id2,
+                                    user_id: id,
+                                    total: total
+                                };
+
+                                axios.post(
+                                    'http://192.168.20.20:8000/api/orders',
+                                    bodyParameters,
+                                    config
+                                ).then((response) => {
+                                    axios.get(`http://192.168.20.20:3000/orders/${id}`)
+                                        .then((response) => {
+                                            if (response.data.cantidad % 10 == 0 && tipo==2) {
+                                                Alert.alert(
+                                                    'Llegaste a tu compra numero 10',
+                                                    'Bonus al envio: Limonada natural',
+                                                    [
+                                                        { text: 'OK', onPress: () => console.log('Alerta cerrada') }
+                                                      ]
+                                                );
+                                            }
+                                            setPlate_id('');
+                                            setDrink_id('');
+                                            setDirec('');
+                                            setTable('');
+                                            navigation.navigate('VerOrden');
+                                        }).catch((error) => {
+                                            console.error('Error al obtener datos:', error);
+                                        });
+                                })
+                                    .catch((error) => {
+                                        console.error("Eroor", error);
+                                        setDirec('');
+                                        setTable('');
+                                        setPlate_id('');
+                                        setDrink_id('');
+                                        navigation.navigate('Orden');
+                                    });
+                                console.log('Pedido realizado');
+                            },
+                        },
                     ],
                     { cancelable: false }
-                  );
+                );
             }
         } catch (error) {
             console.error('Error al realizar la orden:', error);
