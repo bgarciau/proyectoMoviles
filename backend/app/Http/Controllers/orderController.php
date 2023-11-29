@@ -32,8 +32,7 @@ class orderController extends Controller
     public function store(Request $request)
     {
         $order = new order;
-        $order->waiter_id = $request->waiter_id;
-        $order->client_id = $request->client_id;
+        $order->user_id = $request->user_id;
         $order->table = $request->table;
         $order->direccion = $request->direccion;
         $order->plate_id = $request->plate_id;
@@ -49,7 +48,8 @@ class orderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $orders = Order::where('user_id', $id)->get();
+        return json_encode(["orders" => $orders]);
     }
 
     /**
@@ -66,8 +66,7 @@ class orderController extends Controller
     public function update(Request $request, string $id)
     {
         $order = order::find($id);
-        $order->waiter_id = $request->waiter_id;
-        $order->client_id = $request->client_id;
+        $order->user_id = $request->user_id;
         $order->table = $request->table;
         $order->direccion = $request->direccion;
         $order->plate_id = $request->plate_id;

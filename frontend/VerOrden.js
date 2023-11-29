@@ -2,67 +2,128 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Carousel from 'react-native-snap-carousel';
 import Menu from './Menu';
-import OrdenCard from './OrdenCard';
+import { ScrollView } from 'react-native';
 
-const image = { uri: 'https://i.pinimg.com/564x/86/92/22/869222126d19f9969f05f67e803fa404.jpg' };
+
+const image = { uri: 'https://i.pinimg.com/564x/fe/2b/ef/fe2bef705bc8fcc5cc46a17784cf2bde.jpg' };
 
 const VerOrden = ({ navigation }) => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [tipo, setTipo] = useState();
 
-    useEffect(() => {
-        AsyncStorage.getItem('token', function(error, userToken) {
-            if (error) {
-              console.error('Error al obtener el token:', error);
-            } else if (userToken) {
-        axios.get('http://192.168.123.80:8000/api/orders',{
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [tokenPair, idPair] = await AsyncStorage.multiGet(['token', 'id']);
+        const userToken = tokenPair[1];
+        const id = idPair[1];
+
+        if (userToken && id) {
+          const response = await axios.get(`http://192.168.20.20:8000/api/orders/${id}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${userToken}`,
             },
-          }).then(response => {
-            setData(response.data.orders);
-          })
-          .catch(error => {
-            console.error(error);
-          })
-            }})
-    },[]);
+          });
+          setData(response.data.orders);
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
 
+    fetchData();
+
+    AsyncStorage.getItem('tipo', function (error, userTipo) {
+      if (error) {
+        console.error('Error al obtener el tipo:', error);
+      } else if (userTipo) {
+        setTipo(userTipo);
+      }
+    })
+  }, []);
+  if (tipo == 2) {
     return (
-        <View style={styles.container}>
-            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-            <Text>MIS ORDENES</Text>
-            <Carousel
-                containerCustomStyle={{overflow: 'visible'}}
-                data={data}
-                renderItem={({ item }) => <OrdenCard item={item}/>}
-                firstItem={1}
-                inactiveSlideOpacity={0.75}
-                inactiveSlideScale={0.77}
-                sliderWidth={400}
-                itemWidth={260}
-                slideStyle={{display: 'flex',alignItems: 'center'}}
-            />
-            <Menu navigation={navigation} />
-            </ImageBackground>
-        </View>
+      <ScrollView style={styles.scroll}>
+        <ImageBackground source={image} resizeMode="repeat" style={styles.image}>
+          <View style={styles.container}>
+            <Text style={styles.titulo}>MIS ORDENES</Text>
+            {/* CARD1 */}
+            {data.map((item) => (
+              <View style={styles.marco}>
+                <Text style={styles.texto}>Orden de compra:{item.id}</Text>
+                <Text style={styles.texto}>Estado:{item.state}</Text>
+                <Text style={styles.texto}>Cliente:{item.user_id}</Text>
+                <Text style={styles.texto}>Direccion:{item.direccion}</Text>
+                <Text style={styles.texto}>Plato:{item.plate_id}</Text>
+                <Text style={styles.texto}>Bebida:{item.drink_id}</Text>
+                <Text style={styles.texto}>Total:{item.total}</Text>
+              </View>
+            ))}
+          </View>
+          <Menu navigation={navigation} />
+        </ImageBackground>
+      </ScrollView>
     );
+  } else {
+    return (
+      <ScrollView style={styles.scroll}>
+        <ImageBackground source={image} resizeMode="repeat" style={styles.image}>
+          <View style={styles.container}>
+            <Text>MIS ORDENES</Text>
+            {/* CARD1 */}
+            {data.map((item) => (
+              <View style={styles.marco}>
+                <Text style={styles.texto}>Orden de compra:{item.id}</Text>
+                <Text style={styles.texto}>Estado:{item.state}</Text>
+                <Text style={styles.texto}>Meseroo:{item.user_id}</Text>
+                <Text style={styles.texto}>Mesa:{item.table}</Text>
+                <Text style={styles.texto}>Plato:{item.plate_id}</Text>
+                <Text style={styles.texto}>Bebida:{item.drink_id}</Text>
+                <Text style={styles.texto}>Total:{item.total}</Text>
+              </View>
+            ))}
+          </View>
+          <Menu navigation={navigation} />
+        </ImageBackground>
+      </ScrollView>
+    );
+  }
 };
 
 export default VerOrden;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // backgroundColor: "#D3B87D"
-    },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  container: {
+    flex: 1,
+    marginTop:100
+  },
+  scroll: {
+    flex: 1,
+    resizeMode:"cover"
+  },
+  image: {
+    flex: 1,
+  },
+  texto: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'left',
+    marginTop: 20,
+    marginLeft: 20,
+  },
+  titulo: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  marco: {
+    borderRadius: 20,
+    backgroundColor: '#DC7633',
+    marginTop: 10,
+    height: 380,
+    width: '70%',
+    alignSelf: 'center',
+  }
 });

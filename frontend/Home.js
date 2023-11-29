@@ -11,6 +11,13 @@ const Home = ({ navigation }) => {
     const navigateToScreen = (screenName) => {
         navigation.navigate(screenName);
     };
+    const handleOrden = () => {
+        navigation.navigate('Orden');
+    };
+
+    const handleVerOrden = () => {
+        navigation.navigate('VerOrden');
+    };
 
     return (
             <View style={styles.cardContainer}>
@@ -20,9 +27,11 @@ const Home = ({ navigation }) => {
                     <Text style={{ fontSize: 20, textAlign: 'center' }}>
                         Podrás:
                         {"\n"}
-                        <Text><Icon name="th-list" size={20} color="#FAEE00" /> Ver ordenes.</Text>
                         {"\n"}
-                        <Text><Icon name="shopping-cart" size={20} color="#FAEE00" /> Realizar orden.</Text>
+                        <Text onPress={handleVerOrden} ><Icon name="th-list" size={20} color="#FAEE00" /> Ver ordenes.</Text>
+                        {"\n"}
+                        {"\n"}
+                        <Text onPress={handleOrden}><Icon name="shopping-cart" size={20} color="#FAEE00" /> Realizar ordenes.</Text>
                         {"\n"}
                         
                     </Text>

@@ -17,15 +17,17 @@ export default function Login() {
         navigation.navigate('Registro');
     };
     const handleLogin = () => {
-        axios.post('http://192.168.123.80:8000/api/login', {
+        axios.post('http://192.168.20.20:8000/api/login', {
             email: email,
             password: password,
         })
             .then((response) => {
                 const token = response.data.token;
                 const tipo = response.data.tipo.toString();
+                const id = response.data.id.toString();
                 AsyncStorage.setItem('token', token);
                 AsyncStorage.setItem('tipo', tipo);
+                AsyncStorage.setItem('id', id);
                     navigation.navigate('Home');
                 setEmail('');
                 setPassword('');

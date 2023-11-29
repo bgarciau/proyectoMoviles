@@ -14,12 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('state')->default('pendiente');
-            $table->unsignedbigInteger('waiter_id')->nullable();
-            $table->foreign('waiter_id')->references('id')->on('users');
-            $table->unsignedbigInteger('client_id')->nullable();
-            $table->foreign('client_id')->references('id')->on('users');
+            $table->unsignedbigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('table')->nullable();
-            $table->string('direcc')->nullable();
+            $table->string('direccion')->nullable();
             $table->unsignedbigInteger('plate_id')->nullable();
             $table->foreign('plate_id')->references('id')->on('plates');
             $table->unsignedbigInteger('drink_id')->nullable();

@@ -17,7 +17,7 @@ export default function Registro() {
         navigation.navigate('Login');
     };
     const handleRegistro = () => {
-        axios.post('http://192.168.123.80:8000/api/registro', {
+        axios.post('http://192.168.20.20:8000/api/registro', {
             name: name,
             phone: phone,
             email: email,

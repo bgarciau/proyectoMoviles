@@ -31,10 +31,12 @@ class SecurityAuthController extends Controller
         $user = $request->user();
         $token = $user->createToken('authToken')->plainTextToken;
         $tipo = (int)$user->role_id;
+        $idU = (int)$user->id;
         // Retornamos solo el token en formato de texto plano
         return response()->json([
             'token' => $token,
-            'tipo' => $tipo,	
+            'tipo' => $tipo,
+            'id' => $idU,	
         ], 200);
     }
 

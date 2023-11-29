@@ -30,9 +30,9 @@
 
             </div>
             <div class="mb-3">
-                <label class="form-label" for="client_id">CLIENTE:</label>
-                 <select class="form-select" aria-label="Default select example" name="client_id" id="clientes">
-                 <option value='{{ $order->waiter_id }} ' >{{ $order->client_id }}  </option>   
+                <label class="form-label" for="user_id">CLIENTE:</label>
+                 <select class="form-select" aria-label="Default select example" name="user_id" id="clientes">
+                 <option value='{{ $order->waiter_id }} ' >{{ $order->user_id }}  </option>   
                  @foreach ($clientes as $cliente)
                     <option value="{{ $cliente->id }}">{{ $cliente->id }} ~ {{ $cliente->name }}</option>
                     @endforeach

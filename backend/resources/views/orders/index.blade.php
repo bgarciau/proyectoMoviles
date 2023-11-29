@@ -39,7 +39,7 @@
                                     {{ $order->waiter_id }}
                                 </td>
                                 <td>
-                                    {{ $order->client_id }}
+                                    {{ $order->user_id }}
                                 </td>
                                 <td>
                                     {{ $order->table }}
@@ -102,8 +102,8 @@
 
             </div>
             <div class="mb-3">
-                <label class="form-label" for="client_id">CLIENTE:</label>
-                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="client_id" id="clientes">
+                <label class="form-label" for="user_id">CLIENTE:</label>
+                <select class="form-select" style="background-color: lightgoldenrodyellow" aria-label="Default select example" name="user_id" id="clientes">
                 <option value= >Seleccione un cliente </option>   
                 @foreach ($clientes as $cliente)
                     <option value="{{ $cliente->id }}">{{ $cliente->id }} ~ {{ $cliente->name }}</option>

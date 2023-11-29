@@ -39,7 +39,7 @@ class orderWebController extends Controller
     {
         $order = new order;
         $order->waiter_id = $request->waiter_id;
-        $order->client_id = $request->client_id;
+        $order->user_id = $request->user_id;
         $order->table = $request->table;
         $order->plate_id = $request->plate_id;
         $order->drink_id = $request->drink_id;
@@ -77,7 +77,7 @@ class orderWebController extends Controller
     {
         $order = order::find($id);
         $order->waiter_id = $request->waiter_id;
-        $order->client_id = $request->client_id;
+        $order->user_id = $request->user_id;
         $order->table = $request->table;
         $order->plate_id = $request->plate_id;
         $order->drink_id = $request->drink_id;
